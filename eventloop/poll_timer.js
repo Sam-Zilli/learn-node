@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-function someAsyncOperation(callback) {
+function someAsyncOperation(callback) { // this finishes BEFORE 100ms
   fs.readFile('./data/test.txt', callback);
 }
 
 const timeoutScheduled = Date.now();
 
-setTimeout(() => {
+setTimeout(() => { 
   const delay = Date.now() - timeoutScheduled;
 
   console.log(`${delay}ms have passed since I was scheduled`);
@@ -21,3 +21,7 @@ someAsyncOperation(() => {
     // do nothing
   }
 });
+
+
+// someAsyncOperation happens first
+// THEN 117ms have passed since I was scheduled
